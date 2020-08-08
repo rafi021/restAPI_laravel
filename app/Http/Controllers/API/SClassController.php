@@ -93,8 +93,12 @@ class SClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SClass $sClass,$id)
     {
-        //
+        DB::table('s_classes')->where('id', $id)->delete();
+        //$sClass->delete();
+        return response()->json([
+            'success' => "Deleted Successfully!!!"
+        ],200);
     }
 }
