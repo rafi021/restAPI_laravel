@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\SClass;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +39,18 @@ class SClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'class_name' => 'required|unique:s_classes|max:25',
+        ]); 
+
+        SClass::insert([
+            'class_name' => $request->input('class_name'),
+            'created_at' => Carbon::now(),
+        ]);
+
+        return response()->json([
+            'success' => "Inserted Successfully!!!"
+        ],200);
     }
 
     /**
