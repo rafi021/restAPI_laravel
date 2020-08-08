@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SClassController extends Controller
 {
@@ -14,7 +15,8 @@ class SClassController extends Controller
      */
     public function index()
     {
-        //
+        $sclasses = DB::table('s_classes')->get();
+        return response()->json($sclasses);
     }
 
     /**
