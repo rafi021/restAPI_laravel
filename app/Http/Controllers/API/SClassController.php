@@ -61,7 +61,8 @@ class SClassController extends Controller
      */
     public function show($id)
     {
-        //
+        $sClass = SClass::findOrFail($id);
+        return response()->json($sClass);
     }
 
     /**
