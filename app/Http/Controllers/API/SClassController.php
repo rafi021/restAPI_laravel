@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\SClass;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\DB;
 
 class SClassController extends Controller
@@ -85,7 +85,17 @@ class SClassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'class_name' => 'required|unique:s_classes|max:25',
+        ]); 
+
+        $sClass = SClass::findOrFail($id);
+        $sClass->update([
+            'class_name' => $request->input('class_name'),
+        ]);
+        return response()->json([
+            'success' => "Updated Successfully!!!"
+        ],200);
     }
 
     /**
